@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import isEmail from 'validator/lib/isEmail';
+import isEmail from 'validator/lib/isEmail.js';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const userSchema = new Schema(
@@ -56,16 +56,16 @@ const userSchema = new Schema(
 )
 
 // Incript password befor save document in MongoDB.
-userSchema.pre("save", async function () {
-  if (!this.isModified()) return next();
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 10);
   next();
 })
 
-// Function for check password correction.
+// Function for check password correction
 userSchema.methods.isPasswordCorrect = async function (password) {
-  return await bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.password)
 }
 
 // Genrate Access Token utility function. 

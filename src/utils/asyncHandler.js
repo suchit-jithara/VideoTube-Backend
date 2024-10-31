@@ -1,6 +1,10 @@
 const asyncHandler = (requestHandler) => {
-  return (req, res, next) => {
-    Promise.resolve(requestHandler(req, res, next)).then((data) => { console.log('.then', data) }).catch((err) => next(err))
+  return async (req, res, next) => {
+    Promise.resolve(requestHandler(req, res, next)).then((data) => {
+      // console.log('👍🏻 :: ', data) 
+    }).catch((err) => {
+      next(err);
+    })
   }
 }
 

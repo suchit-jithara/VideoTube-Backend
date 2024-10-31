@@ -5,7 +5,7 @@ console.log("Jay Bhagvan");
 // This is a shortcut that immediately imports dotenv/config, which automatically calls dotenv.config() behind the scenes.
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
-import connectDB from "./db/index.js";
+import connectDB from "./db/index.js";  
 import app from "./app.js";
 
 console.log(process.env.PORT)
